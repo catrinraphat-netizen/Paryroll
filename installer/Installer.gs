@@ -37,7 +37,7 @@ function api_(method, path, body) {
   });
   var code = r.getResponseCode(), text = r.getContentText();
   if (code === 403 && /has not been used|is disabled|SERVICE_DISABLED|User has not enabled/i.test(text)) {
-    throw new Error('ยังไม่ได้เปิด Google Apps Script API → เปิดที่ https://script.google.com/home/usersettings แล้ว Run install ใหม่');
+    throw new Error('ยังไม่ได้เปิด Google Apps Script API → เปิดที่ https://script.google.com/home/usersettings แล้ว Run install ใหม่\nคำตอบจาก Google: ' + text.slice(0, 800));
   }
   if (code >= 300) throw new Error('Apps Script API ' + path + ' ตอบ ' + code + ': ' + text.slice(0, 500));
   return JSON.parse(text);
